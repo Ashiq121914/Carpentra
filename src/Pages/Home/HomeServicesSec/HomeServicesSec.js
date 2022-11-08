@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Services from "../../Services/Services";
+
 import HomeServiceCard from "../HomeServiceCard/HomeServiceCard";
 
 const HomeServicesSec = () => {

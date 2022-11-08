@@ -15,7 +15,7 @@ const Login = () => {
           <div className="flex flex-col items-center justify-center xl:flex-row">
             <div className="w-full max-w-xl xl:px-8 xl:w-5/12">
               <div className="bg-white rounded shadow-2xl p-7 sm:p-10">
-                <h3 className="mb-4 text-xl font-semibold sm:text-center sm:mb-6 sm:text-2xl">
+                <h3 className="mb-4  text-3xl sm:text-center sm:mb-6 font-bold">
                   Please Login
                 </h3>
                 <form>
