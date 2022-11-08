@@ -1,8 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgimg from "../../assets/home/login.jpg";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
+  const { login } = useContext(AuthContext);
+
+  // to redirect in the right page
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    login(email, password)
+      .then((result) => {
+        const user = result.user;
+
+        console.log(user);
+        form.reset();
+        navigate(from, { replace: true });
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div className="relative">
       <img
@@ -18,7 +45,7 @@ const Login = () => {
                 <h3 className="mb-4  text-3xl sm:text-center sm:mb-6 font-bold">
                   Please Login
                 </h3>
-                <form>
+                <form onSubmit={handleLogin}>
                   <div className="mb-1 sm:mb-2">
                     <label className="inline-block mb-1 font-medium">
                       Email
