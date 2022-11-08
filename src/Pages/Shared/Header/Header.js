@@ -10,7 +10,7 @@ const menuItems = (
     </li>
 
     <li className="font-semibold text-white ">
-      <Link to="/">Home</Link>
+      <Link to="/login">login</Link>
     </li>
   </>
 );
