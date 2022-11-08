@@ -43,9 +43,11 @@ const Header = () => {
             {menuItems}
           </ul>
         </div>
-        <Link to="/">
-          <img className="w-24 " src={logo} alt="" />
-        </Link>
+        <div className=" inline-block sm:bg-end">
+          <Link to="/">
+            <img className="w-24 " src={logo} alt="" />
+          </Link>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
