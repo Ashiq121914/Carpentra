@@ -18,7 +18,7 @@ const HomeServiceCard = ({ service }) => {
           <div className="badge badge-outline">{service.rating}</div>
         </div>
         <div className="text-center">
-          <Link to={`/serviceDetails:${service._id}`}>
+          <Link to={`/services/${service._id}`}>
             <div className="btn btn-ghost">Details</div>
           </Link>
         </div>
