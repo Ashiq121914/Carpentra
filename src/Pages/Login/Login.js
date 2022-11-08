@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgimg from "../../assets/home/login.jpg";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
+  const { login, googleSignin } = useContext(AuthContext);
 
   // to redirect in the right page
   const location = useLocation();
@@ -25,6 +26,15 @@ const Login = () => {
 
         console.log(user);
         form.reset();
+        navigate(from, { replace: true });
+      })
+      .catch((error) => console.error(error));
+  };
+  const hangleGoogleSignIn = () => {
+    googleSignin()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
         navigate(from, { replace: true });
       })
       .catch((error) => console.error(error));
@@ -87,6 +97,14 @@ const Login = () => {
                     </Link>
                   </p>
                 </form>
+                <p className="my-5 font-bold text-xl text-center">
+                  Or Login with
+                </p>
+                <div onClick={hangleGoogleSignIn} className="text-center">
+                  <button className="btn btn-ghost">
+                    <FaGoogle className="text-slate text-3xl "></FaGoogle>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
