@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MyReviewsTable = ({ reviewItem, handleDelete }) => {
   const { _id, serviceName, review } = reviewItem;
@@ -10,7 +11,14 @@ const MyReviewsTable = ({ reviewItem, handleDelete }) => {
         <hr />
         <p className="text-base">{review}</p>
         <div className="card-actions justify-around mt-10">
-          <button className="btn btn-outline btn-success">Edit</button>
+          <button>
+            <Link
+              to={`/reviewUpdate/${_id}`}
+              className="btn btn-outline btn-success"
+            >
+              Edit
+            </Link>
+          </button>
           <button
             onClick={() => handleDelete(_id)}
             className="btn btn-outline btn-error"

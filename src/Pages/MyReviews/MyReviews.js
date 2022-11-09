@@ -34,6 +34,8 @@ const MyReviews = () => {
         });
     }
   };
+
+  // handle update
   return (
     <div className="grid lg:grid-cols-3 grid-cols-1 gap-20 my-20 w-3/4 mx-auto">
       {reviews.map((reviewItem) => (
