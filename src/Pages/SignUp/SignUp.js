@@ -4,12 +4,14 @@ import bgimg from "../../assets/home/login.jpg";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const handleSignUp = (event) => {
     event.preventDefault();
 
     const form = event.target;
+    const name = form.name.value;
+    const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
 
@@ -18,8 +20,19 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         form.reset();
+        handleUpdateUserProfile(name, photoURL);
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleUpdateUserProfile = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+    updateUserProfile(profile)
+      .then(() => {})
+      .catch((error) => console.log(error));
   };
   return (
     <div className="relative">
@@ -42,11 +55,23 @@ const SignUp = () => {
                       Full Name
                     </label>
                     <input
-                      placeholder="Please enter email"
+                      placeholder="Please enter full name"
                       required
                       type="text"
                       className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                       name="name"
+                    />
+                  </div>
+                  <div className="mb-1 sm:mb-2">
+                    <label className="inline-block mb-1 font-medium">
+                      PhotoURL
+                    </label>
+                    <input
+                      placeholder="Please enter PhotoURL"
+                      required
+                      type="text"
+                      className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                      name="photoURL"
                     />
                   </div>
                   <div className="mb-1 sm:mb-2">
