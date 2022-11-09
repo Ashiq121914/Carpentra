@@ -1,11 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import ReviewShow from "./ReviewShow";
 
 const ServicesDetails = () => {
   const { user } = useContext(AuthContext);
   const service = useLoaderData();
   const { _id, title, img, description, full_description } = service;
+
+  // reviews
+  const [reviews, setReviews] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -13,8 +17,42 @@ const ServicesDetails = () => {
     const form = event.target;
 
     const review = form.review.value;
-    console.log("email:", user.email, "id:", _id, "message:", review);
+
+    const reviewObj = {
+      service: _id,
+      serviceName: title,
+      customerName: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL,
+      review,
+    };
+
+    fetch("http://localhost:5000/reviews", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(reviewObj),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          alert("review placed");
+          form.reset();
+        }
+      })
+      .catch((err) => console.log(err));
   };
+
+  // to get the reviews
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/reviews/${_id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data);
+      });
+  }, [reviews]);
 
   return (
     <div className="w-4/5 mx-auto my-20">
@@ -34,6 +72,11 @@ const ServicesDetails = () => {
       <hr className="my-10" />
       <div className="Review">
         {/* add review here */}
+        <div>
+          {reviews.map((review) => (
+            <ReviewShow key={review._id} reviewDetails={review}></ReviewShow>
+          ))}
+        </div>
         <div>
           {user?.email ? (
             <>
