@@ -18,12 +18,19 @@ const Header = () => {
       <li className="font-semibold text-white ">
         <Link to="/">Home</Link>
       </li>
+      <li className="font-semibold text-white ">
+        <Link to="/blogs">Blogs</Link>
+      </li>
 
       {user?.email ? (
         <>
           <li className="font-semibold text-white ">
-            <Link to="/orders">Orders</Link>
+            <Link to="/orders">My reviews</Link>
           </li>
+          <li className="font-semibold text-white ">
+            <Link to="/">Add service</Link>
+          </li>
+
           <li className="font-semibold text-white ">
             <button onClick={handleLogOut} className="btn-ghost">
               Sign Out
