@@ -1,7 +1,8 @@
 import React from "react";
 
-const MyReviewsTable = ({ reviewItem }) => {
-  const { serviceName, review } = reviewItem;
+const MyReviewsTable = ({ reviewItem, handleDelete }) => {
+  const { _id, serviceName, review } = reviewItem;
+
   return (
     <div className="card  w-96 bg-slate-900 text-neutral-content shadow-xl text-center">
       <div className="card-body">
@@ -10,7 +11,12 @@ const MyReviewsTable = ({ reviewItem }) => {
         <p className="text-base">{review}</p>
         <div className="card-actions justify-around mt-10">
           <button className="btn btn-outline btn-success">Edit</button>
-          <button className="btn btn-outline btn-error">Delete</button>
+          <button
+            onClick={() => handleDelete(_id)}
+            className="btn btn-outline btn-error"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
