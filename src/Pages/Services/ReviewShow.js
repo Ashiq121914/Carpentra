@@ -38,10 +38,6 @@ const ReviewShow = ({ reviewDetails }) => {
               </div>
             </td>
             <td>{review}</td>
-
-            <th>
-              <button className="btn btn-ghost btn-xs">details</button>
-            </th>
           </tr>
         </tbody>
       </table>
