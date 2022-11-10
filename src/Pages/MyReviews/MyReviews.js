@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 import MyReviewsTable from "./MyReviewsTable";
 
 const MyReviews = () => {
+  useTitle("myReviews");
   const { user, logOut } = useContext(AuthContext);
 
   const [reviews, setReviews] = useState([]);
@@ -36,7 +39,7 @@ const MyReviews = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {
-            alert("deleted success");
+            toast.success("Successfully deleted!");
             const remaining = reviews.filter((rvw) => rvw._id !== id);
             setReviews(remaining);
           }

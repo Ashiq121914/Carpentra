@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import useTitle from "../../hooks/useTitle";
 import ServicesCard from "./ServicesCard";
 
 const Services = () => {
+  //dynamic page
+  useTitle("services");
   const [services, setServices] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5000/services")

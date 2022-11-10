@@ -1,7 +1,10 @@
 import React from "react";
+import toast from "react-hot-toast";
 import bg from "../../assets/home/addService.jpg";
+import useTitle from "../../hooks/useTitle";
 
 const AddService = () => {
+  useTitle("addService");
   const handleAddService = (event) => {
     event.preventDefault();
 
@@ -32,7 +35,7 @@ const AddService = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          alert("order  placed successfully");
+          toast.success("Successfully added!");
           form.reset();
         }
       })

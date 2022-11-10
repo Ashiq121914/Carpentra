@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import ReviewShow from "./ReviewShow";
@@ -37,7 +38,7 @@ const ServicesDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          alert("review placed");
+          toast.success("review added!");
           form.reset();
         }
       })

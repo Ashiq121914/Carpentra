@@ -3,8 +3,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgimg from "../../assets/home/login.jpg";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
+import useTitle from "../../hooks/useTitle";
 
 const Login = () => {
+  useTitle("login");
   const { login, googleSignin } = useContext(AuthContext);
 
   // to redirect in the right page
