@@ -153,6 +153,8 @@ const SignUp = () => {
                       Login
                     </Link>
                   </p>
+
+                  <p className="my-5 text-orange-800">{error}</p>
                 </form>
               </div>
             </div>

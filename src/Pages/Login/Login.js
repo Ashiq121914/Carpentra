@@ -144,6 +144,7 @@ const Login = () => {
                     </Link>
                   </p>
                 </form>
+                <p className="my-5 text-orange-800">{error}</p>
                 <p className="my-5 font-bold text-xl text-center">
                   Or Login with
                 </p>
