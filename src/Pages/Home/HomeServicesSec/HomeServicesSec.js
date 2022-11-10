@@ -6,7 +6,7 @@ import HomeServiceCard from "../HomeServiceCard/HomeServiceCard";
 const HomeServicesSec = () => {
   const [services, setServices] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/Homeservices")
+    fetch("https://service-review-server-side-eight.vercel.app/Homeservices")
       .then((res) => res.json())
       .then((data) => setServices(data));
   });

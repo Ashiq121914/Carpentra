@@ -28,7 +28,7 @@ const ServicesDetails = () => {
       review,
     };
 
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://service-review-server-side-eight.vercel.app/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -48,7 +48,7 @@ const ServicesDetails = () => {
   // to get the reviews
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews/${_id}`)
+    fetch(`https://service-review-server-side-eight.vercel.app/reviews/${_id}`)
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);
@@ -99,8 +99,11 @@ const ServicesDetails = () => {
               </div>
             </>
           ) : (
-            <p>
-              Please <Link to="/login">Login</Link>
+            <p className="text-2xl my-5">
+              Please{" "}
+              <Link to="/login" className="underline underline-offset-1">
+                Login to add a review
+              </Link>
             </p>
           )}
         </div>

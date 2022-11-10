@@ -12,11 +12,14 @@ const MyReviews = () => {
 
   // to get the reviews
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("Carpentra-token")}`,
-      },
-    })
+    fetch(
+      `https://service-review-server-side-eight.vercel.app/reviews?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("Carpentra-token")}`,
+        },
+      }
+    )
       .then((res) => {
         if (res.status === 401 || res.status === 403) {
           return logOut();
@@ -33,9 +36,12 @@ const MyReviews = () => {
     const proceed = window.confirm("are you sure you want to delete");
 
     if (proceed) {
-      fetch(`http://localhost:5000/reviews/${id}`, {
-        method: "DELETE",
-      })
+      fetch(
+        `https://service-review-server-side-eight.vercel.app/reviews/${id}`,
+        {
+          method: "DELETE",
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {

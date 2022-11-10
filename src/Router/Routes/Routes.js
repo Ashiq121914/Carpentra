@@ -60,14 +60,18 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) => {
-          return fetch(`http://localhost:5000/reviewUpdate/${params.id}`);
+          return fetch(
+            `https://service-review-server-side-eight.vercel.app/reviewUpdate/${params.id}`
+          );
         },
       },
       {
         path: "/services/:id",
         element: <ServicesDetails></ServicesDetails>,
         loader: ({ params }) => {
-          return fetch(`http://localhost:5000/services/${params.id}`);
+          return fetch(
+            `https://service-review-server-side-eight.vercel.app/services/${params.id}`
+          );
         },
       },
     ],
