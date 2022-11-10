@@ -26,7 +26,7 @@ const MyReviews = () => {
       .then((data) => {
         setReviews(data);
       });
-  }, [logOut, user?.email]);
+  }, [user?.email]);
 
   //handle delete
   const handleDelete = (id) => {
@@ -49,15 +49,21 @@ const MyReviews = () => {
 
   // handle update
   return (
-    <div className="grid lg:grid-cols-3 grid-cols-1 gap-20 my-20 w-3/4 mx-auto">
-      {reviews.map((reviewItem) => (
-        // review table
-        <MyReviewsTable
-          key={reviewItem._id}
-          reviewItem={reviewItem}
-          handleDelete={handleDelete}
-        ></MyReviewsTable>
-      ))}
+    <div className="grid lg:grid-cols-3 grid-cols-1 gap-20 my-60 w-3/4 mx-auto">
+      {reviews.length > 0 ? (
+        <>
+          {reviews.map((reviewItem) => (
+            // review table
+            <MyReviewsTable
+              key={reviewItem._id}
+              reviewItem={reviewItem}
+              handleDelete={handleDelete}
+            ></MyReviewsTable>
+          ))}
+        </>
+      ) : (
+        <h2 className="text-5xl text-center">No reviews were added</h2>
+      )}
     </div>
   );
 };

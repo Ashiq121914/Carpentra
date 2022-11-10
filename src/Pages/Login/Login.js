@@ -4,10 +4,11 @@ import bgimg from "../../assets/home/login.jpg";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
 import useTitle from "../../hooks/useTitle";
+import { ColorRing } from "react-loader-spinner";
 
 const Login = () => {
   useTitle("login");
-  const { login, googleSignin } = useContext(AuthContext);
+  const { login, googleSignin, loading } = useContext(AuthContext);
 
   // to redirect in the right page
   const location = useLocation();
@@ -65,6 +66,19 @@ const Login = () => {
       })
       .catch((error) => console.error(error));
   };
+  if (loading) {
+    return (
+      <ColorRing
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{}}
+        wrapperClass="blocks-wrapper"
+        colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+      />
+    );
+  }
 
   return (
     <div className="relative">

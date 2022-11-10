@@ -1,12 +1,19 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { ColorRing } from "react-loader-spinner";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import bgimg from "../../assets/home/login.jpg";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
 
 const SignUp = () => {
   useTitle("signup");
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, loading } = useContext(AuthContext);
+
+  // to redirect in the right page
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -20,7 +27,20 @@ const SignUp = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        const currentUser = { email: user.email };
+
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("Carpentra-token", data.token);
+            navigate(from, { replace: true });
+          });
         form.reset();
         handleUpdateUserProfile(name, photoURL);
       })
@@ -36,6 +56,20 @@ const SignUp = () => {
       .then(() => {})
       .catch((error) => console.log(error));
   };
+
+  if (loading) {
+    return (
+      <ColorRing
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{}}
+        wrapperClass="blocks-wrapper"
+        colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+      />
+    );
+  }
   return (
     <div className="relative">
       <img
