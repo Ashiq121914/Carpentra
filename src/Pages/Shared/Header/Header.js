@@ -31,7 +31,7 @@ const Header = () => {
             <Link to="/myReviews">My reviews</Link>
           </li>
           <li className="font-semibold text-white ">
-            <Link to="/">Add service</Link>
+            <Link to="/addService">Add service</Link>
           </li>
 
           <li className="font-semibold text-white ">
