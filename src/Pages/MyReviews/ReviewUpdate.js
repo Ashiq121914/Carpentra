@@ -12,13 +12,16 @@ const ReviewUpdate = () => {
     const UpdateReview = event.target.review.value;
     reviews.review = UpdateReview;
 
-    fetch(`http://localhost:5000/reviewUpdate/${review._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(reviews),
-    })
+    fetch(
+      `https://service-review-server-side-eight.vercel.app/reviewUpdate/${review._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(reviews),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
