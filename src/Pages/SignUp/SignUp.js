@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import bgimg from "../../assets/home/login.jpg";
@@ -8,6 +8,7 @@ import useTitle from "../../hooks/useTitle";
 const SignUp = () => {
   useTitle("signup");
   const { createUser, updateUserProfile, loading } = useContext(AuthContext);
+  const [error, setError] = useState("");
 
   // to redirect in the right page
   const location = useLocation();
@@ -44,7 +45,7 @@ const SignUp = () => {
         form.reset();
         handleUpdateUserProfile(name, photoURL);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setError(err.message));
   };
 
   const handleUpdateUserProfile = (name, photoURL) => {
@@ -54,21 +55,23 @@ const SignUp = () => {
     };
     updateUserProfile(profile)
       .then(() => {})
-      .catch((error) => console.log(error));
+      .catch((error) => setError(error.message));
   };
 
-  if (loading) {
-    return (
-      <ColorRing
-        visible={true}
-        height="80"
-        width="80"
-        ariaLabel="blocks-loading"
-        wrapperStyle={{}}
-        wrapperClass="blocks-wrapper"
-        colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
-      />
-    );
+  if (!error) {
+    if (loading) {
+      return (
+        <ColorRing
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="blocks-loading"
+          wrapperStyle={{}}
+          wrapperClass="blocks-wrapper"
+          colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+        />
+      );
+    }
   }
   return (
     <div className="relative">

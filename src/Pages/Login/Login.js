@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgimg from "../../assets/home/login.jpg";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
@@ -9,6 +9,7 @@ import { ColorRing } from "react-loader-spinner";
 const Login = () => {
   useTitle("login");
   const { login, googleSignin, loading } = useContext(AuthContext);
+  const [error, setError] = useState("");
 
   // to redirect in the right page
   const location = useLocation();
@@ -28,8 +29,9 @@ const Login = () => {
         const user = result.user;
 
         const currentUser = { email: user.email };
+        setError("");
 
-        fetch("https://service-review-server-side-eight.vercel.app/jwt", {
+        fetch("http://localhost:5000/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -39,11 +41,13 @@ const Login = () => {
           .then((res) => res.json())
           .then((data) => {
             localStorage.setItem("Carpentra-token", data.token);
+
             navigate(from, { replace: true });
           });
+
         form.reset();
       })
-      .catch((error) => console.error(error));
+      .catch((error) => setError(error.message));
   };
   // for google
   const hangleGoogleSignIn = () => {
@@ -51,7 +55,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         const currentUser = { email: user.email };
-        fetch("https://service-review-server-side-eight.vercel.app/jwt", {
+        fetch("http://localhost:5000/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -64,20 +68,23 @@ const Login = () => {
             navigate(from, { replace: true });
           });
       })
-      .catch((error) => console.error(error));
+      .catch((error) => setError(error.message));
   };
-  if (loading) {
-    return (
-      <ColorRing
-        visible={true}
-        height="80"
-        width="80"
-        ariaLabel="blocks-loading"
-        wrapperStyle={{}}
-        wrapperClass="blocks-wrapper"
-        colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
-      />
-    );
+
+  if (!error) {
+    if (loading) {
+      return (
+        <ColorRing
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="blocks-loading"
+          wrapperStyle={{}}
+          wrapperClass="blocks-wrapper"
+          colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+        />
+      );
+    }
   }
 
   return (

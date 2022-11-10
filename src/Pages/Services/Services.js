@@ -5,17 +5,22 @@ import useTitle from "../../hooks/useTitle";
 import ServicesCard from "./ServicesCard";
 
 const Services = () => {
-  const { loading } = useContext(AuthContext);
+  const [loader, setLoader] = useState(true);
+  const [services, setServices] = useState([]);
 
   //dynamic page
   useTitle("services");
-  const [services, setServices] = useState([]);
+
   useEffect(() => {
     fetch("https://service-review-server-side-eight.vercel.app/services")
       .then((res) => res.json())
-      .then((data) => setServices(data));
+      .then((data) => {
+        setLoader(false);
+        setServices(data);
+      });
   });
-  if (loading) {
+
+  if (loader) {
     return (
       <ColorRing
         visible={true}
