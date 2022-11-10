@@ -80,9 +80,8 @@ const ServicesDetails = () => {
         <div>
           {user?.email ? (
             <>
-              <div>{user.displayName}</div>
-              <div>
-                <h2>Add your Review here</h2>
+              <div className="mt-10">
+                <h2 className="text-2xl font-bold">Add your Review here</h2>
                 <form onSubmit={handleSubmit}>
                   <div className="form-control">
                     <label className="label"></label>
