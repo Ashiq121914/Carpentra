@@ -3,24 +3,22 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 
 const ReviewUpdate = () => {
   const review = useLoaderData();
-  const { service } = review;
 
   const navigate = useNavigate();
   const [reviews, setReviews] = useState(review);
+
   const handleUpdate = (event) => {
     event.preventDefault();
     const UpdateReview = event.target.review.value;
     reviews.review = UpdateReview;
-    fetch(
-      `https://service-review-server-side-eight.vercel.app/reviewUpdate/${service}`,
-      {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(reviews),
-      }
-    )
+
+    fetch(`http://localhost:5000/reviewUpdate/${review._id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(reviews),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
