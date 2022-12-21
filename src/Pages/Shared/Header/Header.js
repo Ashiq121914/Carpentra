@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import logo from "../../../assets/logo2.png";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
@@ -15,40 +15,40 @@ const Header = () => {
   //menuitems
   const menuItems = (
     <>
-      <li className="font-semibold text-white ">
-        <Link to="/">Home</Link>
+      <li className="font-semibold text-white text-lg">
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li className="font-semibold text-white text-lg">
+        <NavLink to="/services">Services</NavLink>
       </li>
       <li className="font-semibold text-white ">
-        <Link to="/services">Services</Link>
-      </li>
-      <li className="font-semibold text-white ">
-        <Link to="/blogs">Blogs</Link>
+        <NavLink to="/blogs">Blogs</NavLink>
       </li>
 
       {user?.email ? (
         <>
-          <li className="font-semibold text-white ">
-            <Link to="/myReviews">My reviews</Link>
+          <li className="font-semibold text-white text-lg">
+            <NavLink to="/myReviews">My reviews</NavLink>
           </li>
-          <li className="font-semibold text-white ">
-            <Link to="/addService">Add service</Link>
+          <li className="font-semibold text-white text-lg">
+            <NavLink to="/addService">Add service</NavLink>
           </li>
 
-          <li className="font-semibold text-white ">
+          <li className="font-semibold text-white text-lg">
             <button onClick={handleLogOut} className="btn-ghost">
               Sign Out
             </button>
           </li>
         </>
       ) : (
-        <li className="font-semibold text-white ">
-          <Link to="/login">Login</Link>
+        <li className="font-semibold text-white text-lg">
+          <NavLink to="/login">Login</NavLink>
         </li>
       )}
     </>
   );
   return (
-    <div className="navbar bg-slate-900">
+    <div className="navbar bg-slate-900 w-11/12 mx-auto">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -75,12 +75,12 @@ const Header = () => {
           </ul>
         </div>
         <div className=" inline-block sm:bg-end">
-          <Link to="/">
-            <img className="w-24 " src={logo} alt="" />
-          </Link>
+          <NavLink to="/">
+            <img className="w-24 rounded-full" src={logo} alt="" />
+          </NavLink>
         </div>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden lg:flex justify-center">
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
     </div>

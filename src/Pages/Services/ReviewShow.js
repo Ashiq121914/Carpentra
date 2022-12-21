@@ -7,10 +7,8 @@ const ReviewShow = ({ reviewDetails }) => {
       <table className="table w-full">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Review</th>
-
-            <th></th>
+            <th className="fw-bold text-lg ">Name</th>
+            <th className="text-end text-lg">Review</th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +25,7 @@ const ReviewShow = ({ reviewDetails }) => {
                 </div>
               </div>
             </td>
-            <td>{review}</td>
+            <td className="text-end">{review}</td>
           </tr>
         </tbody>
       </table>
