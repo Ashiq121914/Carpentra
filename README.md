@@ -1,4 +1,7 @@
 ## Site Name: Carpentra
+### default login:
+ - username: xyz@gmail.com
+ - password: xyz`12
 
 ### Project Live site: https://carpenta-d40fa.web.app/
 
